@@ -41,5 +41,41 @@ $ ./mp6z.py get   --  This will get the settings for all zones and output in JSO
 $ ./mp6z.py get 21 --  This will get the settings for the 1st zone on the second controller (if you have multiples chained)
 $ ./mp6z.py set 21 -v 15 -s 6 --  This will set the 1st zone on the second controller to use source 6 and set volume to 15.
                                   Output will be the new settings in JSON format.
-                                  
+ 
+ 
+pi@pizerow:~/mp6z $ ./mp6z.py set 21 -v 5 -s 6
+{
+  "21": {
+    "balance": "10", 
+    "bass": "14", 
+    "dnd": "00", 
+    "keypad": "01", 
+    "mute": "00", 
+    "name": "Office", 
+    "pa": "00", 
+    "power": "01", 
+    "source": "06", 
+    "sourcename": "Sonos", 
+    "treble": "13", 
+    "volume": "05"
+  }
+}
+pi@pizerow:~/mp6z $ ./mp6z.py get 11
+{
+  "11": {
+    "balance": "10", 
+    "bass": "13", 
+    "dnd": "00", 
+    "keypad": "01", 
+    "mute": "00", 
+    "name": "Dining Room", 
+    "pa": "00", 
+    "power": "01", 
+    "source": "05", 
+    "sourcename": "Empty", 
+    "treble": "14", 
+    "volume": "11"
+  }
+}
+ 
 ```
