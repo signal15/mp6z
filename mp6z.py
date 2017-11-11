@@ -143,14 +143,56 @@ def setZone(zoneNum):
     if ser.isOpen():
         
         try:
-           ser.flushInput() #flush input buffer, discarding all its contents
-           ser.flushOutput() #flush output buffer, aborting current output and discard
-           if args.v:
-               sendstring = "<" + str(zoneNum) + "vo" + str(args.v).zfill(2) + "\r"
-               ser.write(sendstring)
-               if args.verbose:
-                   print("write data: " + sendstring)
-               time.sleep(0.2)
+            ser.flushInput() #flush input buffer, discarding all its contents
+            ser.flushOutput() #flush output buffer, aborting current output and discard
+            if args.v:
+                sendstring = "<" + str(zoneNum) + "vo" + str(args.v).zfill(2) + "\r"
+                ser.write(sendstring)
+                if args.verbose:
+                    print("write data: " + sendstring)
+                time.sleep(0.1)
+            if args.s:
+                sendstring = "<" + str(zoneNum) + "ch" + str(args.s).zfill(2) + "\r"
+                ser.write(sendstring)
+                if args.verbose:
+                    print("write data: " + sendstring)
+                time.sleep(0.1)
+            if args.b:
+                sendstring = "<" + str(zoneNum) + "bs" + str(args.b).zfill(2) + "\r"
+                ser.write(sendstring)
+                if args.verbose:
+                    print("write data: " + sendstring)
+                time.sleep(0.1)
+            if args.t:
+                sendstring = "<" + str(zoneNum) + "tr" + str(args.t).zfill(2) + "\r"
+                ser.write(sendstring)
+                if args.verbose:
+                    print("write data: " + sendstring)
+                time.sleep(0.1)
+            if args.m:
+                sendstring = "<" + str(zoneNum) + "mu" + str(args.m).zfill(2) + "\r"
+                ser.write(sendstring)
+                if args.verbose:
+                    print("write data: " + sendstring)
+                time.sleep(0.1)
+            if args.d:
+                sendstring = "<" + str(zoneNum) + "dt" + str(args.d).zfill(2) + "\r"
+                ser.write(sendstring)
+                if args.verbose:
+                    print("write data: " + sendstring)
+                time.sleep(0.1)
+            if args.p:
+                sendstring = "<" + str(zoneNum) + "pr" + str(args.p).zfill(2) + "\r"
+                ser.write(sendstring)
+                if args.verbose:
+                    print("write data: " + sendstring)
+                time.sleep(0.1)
+            if args.B:
+                sendstring = "<" + str(zoneNum) + "bl" + str(args.B).zfill(2) + "\r"
+                ser.write(sendstring)
+                if args.verbose:
+                    print("write data: " + sendstring)
+                time.sleep(0.1)
                
            getZones(args.zone)
         
