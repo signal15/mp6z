@@ -33,7 +33,7 @@ parser.add_argument("-t", help="Set Treble (0-7)", type=int)
 parser.add_argument("-m", help="Set Mute (0=Off, 1=On)", type=int)
 parser.add_argument("-d", help="Set Do Not Disturb (0=Off, 1=On)", type=int) 
 parser.add_argument("-p", help="Set Power (0=Off, 1=On)", type=int)
-parser.add_argument("-B", help="Set Balance (0-20, 10=Center)", type=int)
+parser.add_argument("--bl", help="Set Balance (0-20, 10=Center)", type=int)
 args = parser.parse_args()
 if args.verbose:
     print("Verbosity turned on\r")
@@ -187,8 +187,8 @@ def setZone(zoneNum):
                 if args.verbose:
                     print("write data: " + sendstring)
                 time.sleep(0.1)
-            if args.B:
-                sendstring = "<" + str(zoneNum) + "bl" + str(args.B).zfill(2) + "\r"
+            if args.bl:
+                sendstring = "<" + str(zoneNum) + "bl" + str(args.bl).zfill(2) + "\r"
                 ser.write(sendstring)
                 if args.verbose:
                     print("write data: " + sendstring)
