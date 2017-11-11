@@ -140,6 +140,9 @@ def getZones(zoneNum = None):
         print "Cannot open serial port "
 
 if args.mode == "get":
-    getZones();
+    if args.zone:
+        getZones(args.zone)
+    else:
+        getZones()
 
 ser.close()
