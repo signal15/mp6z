@@ -139,6 +139,24 @@ def getZones(zoneNum = None):
     else:
         print "Cannot open serial port "
 
+def setZone(zoneNum):
+    if ser.isOpen():
+        
+        try:
+           ser.flushInput() #flush input buffer, discarding all its contents
+           ser.flushOutput() #flush output buffer, aborting current output and discard
+           if args.v:
+               sendstring = "<" + str(zoneNum) + "vo" + str(args.v) + "\r"
+               ser.write(sendstring)
+               if args.verbose:
+                   print("write data: " + sendstring)
+               time.sleep(0.2)
+               
+           getZomes(args.zone)
+        
+        except Exception, e1:
+            print "Error communicating...: " + str(e1)
+    
 if args.mode == "get":
     if args.zone:
         getZones(args.zone)
