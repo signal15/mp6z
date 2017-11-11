@@ -11,13 +11,13 @@ Installation
 - chmod +x mp6z.py
 - Make sure you have pyserial installed (apt-get install python-serial)
 - Edit the top of the script for your source and zone names if you want, and make sure you set the serial port from /dev/ttyUSB0 to something else if your's is different.
-- Run the script, usage info below.
+- Run the script, usage info below.  Use the --verbose option so you can see what the script is sending and receiving over serial.
 
 If you have a single controller, Zone 1 needs to be specified as "11" when using the script, Zone 2 is 12, etc.  This is because if you chain multiple controllers together, the first digit is the controller number, and the second digit is the zone number.  
 
 ```
 usage: mp6z.py mode [zone] [-h] [--verbose] [-v V] [-s S] [-b B] [-t T] [-m M] [-d D]
-               [-p P] [-B B]
+               [-p P] [--bl bl]
                
 
 positional arguments:
