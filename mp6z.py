@@ -74,15 +74,15 @@ except Exception, e:
     print "Error opening serial port: " + str(e)
     exit()
 
-if args.mode == "get":
+def getZones(zoneNum = None):
     if ser.isOpen():
 
         try:
             zone = {}
             ser.flushInput() #flush input buffer, discarding all its contents
             ser.flushOutput() #flush output buffer, aborting current output and discard 
-            if args.zone:
-                sendstring = "?" + str(args.zone) + "\r"
+            if zoneNum:
+                sendstring = "?" + str(zoneNum) + "\r"
                 ser.write(sendstring)
                 if args.verbose:
                     print("write data: " + sendstring)
@@ -125,7 +125,7 @@ if args.mode == "get":
                     zone[settings[0]]['keypad'] = settings[10]
 
                 numOfLines = numOfLines + 1
-                if args.zone:
+                if zoneNum:
                     if (numOfLines >= 3):
                         break
                 else:
@@ -138,5 +138,8 @@ if args.mode == "get":
 
     else:
         print "Cannot open serial port "
+
+if args.mode == "get":
+    getZones();
 
 ser.close()
