@@ -155,8 +155,8 @@ def getZones(zoneNum = None):
                     zone[settings[0]]['balance'] = settings[8]
                     zone[settings[0]]['source'] = settings[9]
                     zone[settings[0]]['keypad'] = settings[10]
-#                    zone[settings[0]]['name'] = zoneNames[settings[0]]
-#                    zone[settings[0]]['sourcename'] = sourceNames[settings[0]]
+                    zone[settings[0]]['name'] = zoneNames[settings[0]]
+                    zone[settings[0]]['sourcename'] = sourceNames[settings[9]]
 
                 numOfLines = numOfLines + 1
                 if zoneNum:
