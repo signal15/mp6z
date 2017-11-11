@@ -3,6 +3,7 @@ This software was written to use a Raspberry Pi Zero W to control a Monoprice (a
 
 If you know of other products that use this same protocol, please let me know so I can start a list of everything this works with.
 
+```
 usage: mp6z.py mode [zone] [-h] [--verbose] [-v V] [-s S] [-b B] [-t T] [-m M] [-d D]
                [-p P] [-B B]
                
@@ -31,3 +32,4 @@ $ ./mp6z.py set 21 -v 15 -s 6 --  This will set the 1st zone on the second contr
                                   
 Known issues - Still working on set functionality
                Adding a name field for zones that can be configured in the script.
+```
