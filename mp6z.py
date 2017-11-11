@@ -4,13 +4,41 @@
 
 import serial, time, re, json, argparse
 
-#possible timeout values:
-#    1. None: wait forever, block call
-#    2. 0: non-blocking mode, return immediately
-#    3. x, x is bigger than 0, float allowed, timeout block call
+# Change the source names and zone names for your house.  Up to 3 units can be chained
+# together.  Only the 6 sources on the main unit are available as inputs, but all of the 
+# outputs are available.
+sourceNames = {}
+sourceNames['01'] = 'PA'
+sourceNames['02'] = 'Chromecast'
+sourceNames['03'] = 'Radio'
+sourceNames['04'] = 'Empty'
+sourceNames['05'] = 'Empty'
+sourceNames['06'] = 'Sonos'
+
+zoneNames = {}
+zoneNames['11'] = 'Dining Room'
+zoneNames['12'] = 'Living Room'
+zoneNames['13'] = 'Library'
+zoneNames['14'] = 'Parlor'
+zoneNames['15'] = 'Screen Porch'
+zoneNames['16'] = 'Master Bath'
+zoneNames['21'] = 'Office'
+zoneNames['22'] = 'Master Bedroom'
+zoneNames['23'] = 'Garage'
+zoneNames['24'] = 'Unused'
+zoneNames['25'] = 'Unused'
+zoneNames['26'] = 'Unused'
+zoneNames['31'] = ''
+zoneNames['32'] = ''
+zoneNames['33'] = ''
+zoneNames['34'] = ''
+zoneNames['35'] = ''
+zoneNames['36'] = ''
+
+
 
 ser = serial.Serial()
-ser.port = "/dev/ttyUSB0"
+ser.port = "/dev/ttyUSB0" ################## SET ME!!!  If you use a USB dongle, plug it in and type dmesg to see what it uses.  ###########
 ser.baudrate = 9600
 ser.bytesize = serial.EIGHTBITS #number of bits per bytes
 ser.parity = serial.PARITY_NONE #set parity check: no parity
@@ -20,6 +48,10 @@ ser.xonxoff = False     #disable software flow control
 ser.rtscts = False     #disable hardware (RTS/CTS) flow control
 ser.dsrdtr = False       #disable hardware (DSR/DTR) flow control
 ser.writeTimeout = 2     #timeout for write
+#possible timeout values:
+#    1. None: wait forever, block call
+#    2. 0: non-blocking mode, return immediately
+#    3. x, x is bigger than 0, float allowed, timeout block call
 
 # Parse our arguments
 parser = argparse.ArgumentParser()
@@ -123,6 +155,8 @@ def getZones(zoneNum = None):
                     zone[settings[0]]['balance'] = settings[8]
                     zone[settings[0]]['source'] = settings[9]
                     zone[settings[0]]['keypad'] = settings[10]
+                    zone[settings[0]]['name'] = zoneNames[settings[0]]
+                    zone[settings[0]]['sourcename'] = sourceNames[settings[0]]
 
                 numOfLines = numOfLines + 1
                 if zoneNum:
@@ -145,43 +179,43 @@ def setZone(zoneNum):
         try:
             ser.flushInput() #flush input buffer, discarding all its contents
             ser.flushOutput() #flush output buffer, aborting current output and discard
-            if args.v:
+            if args.v != None:
                 sendstring = "<" + str(zoneNum) + "vo" + str(args.v).zfill(2) + "\r"
                 ser.write(sendstring)
                 if args.verbose:
                     print("write data: " + sendstring)
                 time.sleep(0.1)
-            if args.s:
+            if args.s != None:
                 sendstring = "<" + str(zoneNum) + "ch" + str(args.s).zfill(2) + "\r"
                 ser.write(sendstring)
                 if args.verbose:
                     print("write data: " + sendstring)
                 time.sleep(0.1)
-            if args.b:
+            if args.b != None:
                 sendstring = "<" + str(zoneNum) + "bs" + str(args.b).zfill(2) + "\r"
                 ser.write(sendstring)
                 if args.verbose:
                     print("write data: " + sendstring)
                 time.sleep(0.1)
-            if args.t:
+            if args.t != None:
                 sendstring = "<" + str(zoneNum) + "tr" + str(args.t).zfill(2) + "\r"
                 ser.write(sendstring)
                 if args.verbose:
                     print("write data: " + sendstring)
                 time.sleep(0.1)
-            if args.m:
+            if args.m != None:
                 sendstring = "<" + str(zoneNum) + "mu" + str(args.m).zfill(2) + "\r"
                 ser.write(sendstring)
                 if args.verbose:
                     print("write data: " + sendstring)
                 time.sleep(0.1)
-            if args.d:
+            if args.d != None:
                 sendstring = "<" + str(zoneNum) + "dt" + str(args.d).zfill(2) + "\r"
                 ser.write(sendstring)
                 if args.verbose:
                     print("write data: " + sendstring)
                 time.sleep(0.1)
-            if args.p:
+            if args.p != None:
                 sendstring = "<" + str(zoneNum) + "pr" + str(args.p).zfill(2) + "\r"
                 ser.write(sendstring)
                 if args.verbose:
