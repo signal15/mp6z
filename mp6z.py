@@ -146,7 +146,7 @@ def setZone(zoneNum):
            ser.flushInput() #flush input buffer, discarding all its contents
            ser.flushOutput() #flush output buffer, aborting current output and discard
            if args.v:
-               sendstring = "<" + str(zoneNum) + "vo" + str(args.v) + "\r"
+               sendstring = "<" + str(zoneNum) + "vo" + str(args.v).zfill(2) + "\r"
                ser.write(sendstring)
                if args.verbose:
                    print("write data: " + sendstring)
