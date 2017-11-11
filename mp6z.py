@@ -187,7 +187,7 @@ def setZone(zoneNum):
                 if args.verbose:
                     print("write data: " + sendstring)
                 time.sleep(0.1)
-            if args.bl:
+            if args.bl != None:
                 sendstring = "<" + str(zoneNum) + "bl" + str(args.bl).zfill(2) + "\r"
                 ser.write(sendstring)
                 if args.verbose:
