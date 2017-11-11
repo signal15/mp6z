@@ -163,4 +163,7 @@ if args.mode == "get":
     else:
         getZones()
 
+if args.mode == "set":
+    setZome(args.zone)
+    
 ser.close()
