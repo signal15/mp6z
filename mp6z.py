@@ -1,5 +1,9 @@
 #!/usr/bin/env python
 
+# Monoprice and clones 6-zone Whole House Audio control script.  https://www.monoprice.com/product?p_id=10761
+# Should also work with Dayton and some other brands.
+# Project Page: https://github.com/signal15/mp6z
+
 # vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4
 
 import serial, time, re, json, argparse
@@ -28,12 +32,12 @@ zoneNames['23'] = 'Garage'
 zoneNames['24'] = 'Unused'
 zoneNames['25'] = 'Unused'
 zoneNames['26'] = 'Unused'
-zoneNames['31'] = ''
-zoneNames['32'] = ''
-zoneNames['33'] = ''
-zoneNames['34'] = ''
-zoneNames['35'] = ''
-zoneNames['36'] = ''
+zoneNames['31'] = 'Unused'
+zoneNames['32'] = 'Unused'
+zoneNames['33'] = 'Unused'
+zoneNames['34'] = 'Unused'
+zoneNames['35'] = 'Unused'
+zoneNames['36'] = 'Unused'
 
 
 
@@ -60,8 +64,8 @@ parser.add_argument("zone", nargs='?', help="<11-16,21-26,31-36>", type=int)
 parser.add_argument("--verbose", help="Increase output verbosity", action="store_true")
 parser.add_argument("-v", help="Set Volume (0-38)", type=int)
 parser.add_argument("-s", help="Set Source (1-6)", type=int)
-parser.add_argument("-b", help="Set Bass (0-7)", type=int)
-parser.add_argument("-t", help="Set Treble (0-7)", type=int)
+parser.add_argument("-b", help="Set Bass (0-14) -- 0 is -7 and 14 is +7 on Keypad", type=int)
+parser.add_argument("-t", help="Set Treble (0-14) -- 0 is -7 and 14 is +7 on Keypad", type=int)
 parser.add_argument("-m", help="Set Mute (0=Off, 1=On)", type=int)
 parser.add_argument("-d", help="Set Do Not Disturb (0=Off, 1=On)", type=int) 
 parser.add_argument("-p", help="Set Power (0=Off, 1=On)", type=int)
@@ -74,7 +78,7 @@ if args.verbose:
     if args.zone:
         print "Zone:", args.zone, "\r"
 
-#### Inquiry reply structure
+#### Controller Inquiry reply structure
 ## Set commands
 # Set: <xxPPuu\r    Reply: >xxPPuu\r   -- xx = zone, PP = command, uu = value
 # PR = Power (00/01)
