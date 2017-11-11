@@ -152,7 +152,7 @@ def setZone(zoneNum):
                    print("write data: " + sendstring)
                time.sleep(0.2)
                
-           getZomes(args.zone)
+           getZones(args.zone)
         
         except Exception, e1:
             print "Error communicating...: " + str(e1)
