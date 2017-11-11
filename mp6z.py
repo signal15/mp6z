@@ -132,7 +132,7 @@ def getZones(zoneNum = None):
                     if (numOfLines >= 22):
                         break
 
-            print 'ZONES:', json.dumps(zone, sort_keys=True, indent=2)
+            print json.dumps(zone, sort_keys=True, indent=2)
         except Exception, e1:
             print "Error communicating...: " + str(e1)
 
