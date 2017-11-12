@@ -88,9 +88,9 @@ pi@pizerow:~/mp6z $ ./mp6z.py get 11
 
 Usage for webapi.py flask app:
 
-- Install flask and get it working with nginx (plenty of tutorials on this)
+- Install flask and get it working with nginx (https://iotbytes.wordpress.com/python-flask-web-application-on-raspberry-pi-with-nginx-and-uwsgi/)
 - Install shelljob (pip install shelljob)
-- Default path for mp6z.py is /home/pi/mp6z/mp6z.py.  You'll need to change this in several places in the webapi.py script
+- Default path for mp6z.py is /home/pi/mp6z/mp6z.py.  You'll need to change this in several places in the webapi.py script if you have it in a different location
 - Start webserver
 
 Examples of URLs:
