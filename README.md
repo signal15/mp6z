@@ -1,11 +1,17 @@
 # mp6z
+
+mp6z.py -- Python CLI script to control the Audio controller over serial
+webapi.py -- Python/Flask web app that calls mp6z.py for control
+
 This software was written to use a Raspberry Pi Zero W to control a Monoprice (and clones) 6-zone Whole House Audio System.  It will work on any linux machine with a serial port connected to it, just make sure you change the serial port in the software appropriately.  It will probably work on windows as well assuming you know what to change the serial port to.  The serial cable should be a straight through cable, and you can just plug the usb dongle directly into the back of unit.  If you have multiple units, it needs to be plugged into the first unit.
 
-The script outputs JSON, with the intent that it will eventually be run from a web app running locally to provide connectivity to phone apps and home automation systems.  If someone wants to write those, contact me via github and I'll assist where I can.
+The script outputs JSON, with the intent that it will be run from a web app running locally to provide connectivity to phone apps and home automation systems.  If someone wants to write an Android app or a Vera plugin that can talk to the API, contact me via github and I'll assist where I can.
 
 If you know of other products that use this same protocol, please let me know so I can start a list of everything this works with.
 
-Installation
+NOTE:  The webapi.py is pretty quick and dirty.  I've never written one before.  It does literally zero error checking, it has no authentication, it's almost certain to have huge security holes especially since it's calling things from the CLI and sanitizing nothing. DO NOT expose this to the internet!!!
+
+Installation for CLI script
 
 - Copy the script to a directory.
 - chmod +x mp6z.py
@@ -78,4 +84,42 @@ pi@pizerow:~/mp6z $ ./mp6z.py get 11
   }
 }
  
+```
+
+Usage for webapi.py flask app:
+
+- Install flask and get it working with nginx (plenty of tutorials on this)
+- Install shelljob (pip install shelljob)
+- Default path for mp6z.py is /home/pi/mp6z/mp6z.py.  You'll need to change this in several places in the webapi.py script
+- Start webserver
+
+Examples of URLs:
+http://127.0.0.1:5000/api/v1/zones  --- Method: GET - Gets settings for all zones
+http://127.0.0.1/5000/api/v1/zones/11  --- Method: GET - Gets settings for Zone 1 on Controller 1
+http://127.0.0.1/5000/api/v1/zones/11  --- Method: PUT - Updates settings for Zone 1 on Controller 1 and returns new settings. Example below:
+
+```
+pi@pizerow:~ $ curl -i -H "Content-Type: application/json" -X PUT -d '{"volume":"10", "source":"2", "bass":"14", "treble":"13"}' http://localhost:5000/api/v1/zones/21
+HTTP/1.0 200 OK
+Content-Type: text/plain; charset=utf-8
+Connection: close
+Server: Werkzeug/0.12.2 Python/2.7.9
+Date: Sun, 12 Nov 2017 21:27:46 GMT
+
+{
+  "21": {
+    "balance": "10", 
+    "bass": "14", 
+    "dnd": "00", 
+    "keypad": "01", 
+    "mute": "00", 
+    "name": "Office", 
+    "pa": "00", 
+    "power": "01", 
+    "source": "02", 
+    "sourcename": "Chromecast", 
+    "treble": "13", 
+    "volume": "10"
+  }
+}
 ```
