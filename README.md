@@ -94,6 +94,7 @@ Usage for webapi.py flask app:
 - Start webserver
 
 Examples of URLs:
+
 http://127.0.0.1:5000/api/v1/zones  --- Method: GET - Gets settings for all zones
 http://127.0.0.1/5000/api/v1/zones/11  --- Method: GET - Gets settings for Zone 1 on Controller 1
 http://127.0.0.1/5000/api/v1/zones/11  --- Method: PUT - Updates settings for Zone 1 on Controller 1 and returns new settings. Example below:
