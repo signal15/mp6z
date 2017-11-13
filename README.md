@@ -1,6 +1,7 @@
 # mp6z
 
 mp6z.py -- Python CLI script to control the Audio controller over serial
+
 webapi.py -- Python/Flask web app that calls mp6z.py for control
 
 This software was written to use a Raspberry Pi Zero W to control a Monoprice (and clones) 6-zone Whole House Audio System.  It will work on any linux machine with a serial port connected to it, just make sure you change the serial port in the software appropriately.  It will probably work on windows as well assuming you know what to change the serial port to.  The serial cable should be a straight through cable, and you can just plug the usb dongle directly into the back of unit.  If you have multiple units, it needs to be plugged into the first unit.
